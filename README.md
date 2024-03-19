@@ -79,6 +79,14 @@ Botanix  Club allows you to manage investment clubs, and to spread access to par
 
 ![Screenshot from 2024-03-19 19-02-03](https://github.com/Omega12Pirme/BotanixClub/assets/105157723/91cd3461-7c59-4c5c-a305-c48ab7071066)
 
+## What you can currently do in this version is:
+
+- Create investment clubs: Just define a name and the club will be associated with the account of the user who creates it (owner).
+- Join or leave clubs: Anyone with an aeternity blockchain account can join the available investment clubs, as well as leave one, with just a couple of clicks.
+- Contribute to the club: Any member of a club can contribute to the common fund (pool), depositing AE coins that can be used in proposals.
+- Create and Vote on Proposals: Any member who has contributed funds to the club pool can create proposals, giving a description, amount (not to exceed the pool amount), and recipient, with a view to investing in any business/person in a project. Also, all members can approve or reject the proposal (only one vote per member is allowed on each proposal).
+- Run Proposals: A proposal owner can execute a proposal (if approval is greater than rejection), which will cause the proposal amount to be sent to the specified recipient. The owner can also close a proposal, in case of not continuing with it, either as a cancellation, publication error or to avoid sending funds.
+
 
 ## Restrictions
 The club smart contract has some restrictions, similar to real hedge funds:
@@ -90,8 +98,9 @@ The club smart contract has some restrictions, similar to real hedge funds:
 
 
 ## 💥 Challenges we ran into
-- 
-
+- Understanding Dao is very critical and took me more than 4 hours to get the best idea to build
+- I faced lots of issues in smart contract as I have to manage all the funds, proposal, voting periods and many more things but at the end I enjoyed a lot during the building time.'I preferred that it was all 100% web' without a backend other than the smart contract, so any other developer or person can test it in any environment.
+- Creating and testing the application takes more time and website seems to be quite slow.
     
 <br>
 
@@ -110,8 +119,9 @@ The club smart contract has some restrictions, similar to real hedge funds:
     <tr>
       <td>Vercel</td>
       <td>
-        
+       
       </td>
+    </tr>
     </tr>
     </table>
 </div>
