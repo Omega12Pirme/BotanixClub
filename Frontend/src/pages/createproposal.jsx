@@ -418,7 +418,7 @@ function CreateProposal() {
                   <div className="row no-gutters align-items-center">
                     <div className="col mr-2">
                       <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                        Club Balance (pegasus)
+                        Club Balance (BTC)
                       </div>
                       <div className="h5 mb-0 font-weight-bold text-gray-800 club_balance">
                         -
@@ -516,7 +516,7 @@ onChange={(e) => setDestination(e.target.value)}
                         placeholder="Enter the sepolia destination address: 0x....."
                       />{" "}
                       <br />
-                      Amount (in pegasus):{" "}
+                      Amount (in BTC):{" "}
                       <input
                         type="number"
                         id="proposal_amount"
