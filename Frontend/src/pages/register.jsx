@@ -86,7 +86,7 @@ function saveWallet() {
                   Private Key: <b><span id="filPrivateKey" /></b> <br />
                 </div>
                 <div className="col-sm-12 mb-6 mb-sm-0">
-                  Request some TESNET MATIC from the faucet: <a href="https://pegasus-faucet-react.vercel.app/" target="_blank" className="btn btn-success btn-user btn-block">Faucet</a>
+                  Request some BTC TESNET from the faucet: <a href="https://botanixlabs.xyz/en/testnet" target="_blank" className="btn btn-success btn-user btn-block">Faucet</a>
                 </div>
                 <div className="col-sm-12 mb-6 mb-sm-0">
                   Create a password for your wallet: 
