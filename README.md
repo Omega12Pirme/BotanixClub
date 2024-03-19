@@ -48,7 +48,7 @@ Botanix  Club allows you to manage investment clubs, and to spread access to par
 ![Screenshot from 2024-03-19 18-53-33](https://github.com/Omega12Pirme/BotanixClub/assets/105157723/c20aaf4c-40d2-49f9-80ad-e21c3d725e2b)
 
 
-- Join or leave clubs: Anyone with an COnflux blockchain account can join the available investment clubs, as well as leave one, with just a couple of clicks.
+- Join or leave clubs: Anyone with an BTC blockchain account can join the available investment clubs, as well as leave one, with just a couple of clicks.
 
 ![Screenshot from 2024-03-19 18-54-13](https://github.com/Omega12Pirme/BotanixClub/assets/105157723/1a66e346-de7e-49c3-927a-58474ae8cede)
 
@@ -108,9 +108,9 @@ The club smart contract has some restrictions, similar to real hedge funds:
       <th>URL</th>
     </tr>
     <tr>
-      <td>Vercel(Conflux Network)</td>
+      <td>Vercel</td>
       <td>
-        https://uhack.vercel.app/
+        
       </td>
     </tr>
     </table>
