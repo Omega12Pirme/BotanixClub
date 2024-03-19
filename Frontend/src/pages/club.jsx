@@ -382,7 +382,7 @@ function Club() {
           <div className="sidebar-brand-icon rotate-n-15">
             <i className="fas fa-laugh-wink" />
           </div>
-          <div className="sidebar-brand-text mx-3">INVEST CLUB</div>
+          <div className="sidebar-brand-text mx-3">Botanix CLUB</div>
         </a>
         {/* Divider */}
         <hr className="sidebar-divider my-0" />

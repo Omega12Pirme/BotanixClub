@@ -60,10 +60,10 @@ function saveWallet() {
         <div className="col-lg-7">
           <div className="p-5">
             <div className="text-center">
-              <h1 className="h4 text-gray-900 mb-4">INVEST CLUB - Create an Account!</h1>
+              <h1 className="h4 text-gray-900 mb-4">Botanix CLUB - Create an Account!</h1>
             </div>
             <div className="text-center">
-            INVEST CLUB is a light web wallet and platform that allows you to: 
+            Botanix  is a light web wallet and platform that allows you to: 
               <ul>
                 <li><b>Create investment clubs.</b></li> 
                 <li><b>Join and contribute to investment clubs.</b></li> 
