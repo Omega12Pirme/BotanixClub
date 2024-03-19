@@ -50,23 +50,23 @@ Botanix  Club allows you to manage investment clubs, and to spread access to par
 
 - Join or leave clubs: Anyone with an COnflux blockchain account can join the available investment clubs, as well as leave one, with just a couple of clicks.
 
-  ![Screenshot from 2024-03-19 18-54-13](https://github.com/Omega12Pirme/BotanixClub/assets/105157723/1a66e346-de7e-49c3-927a-58474ae8cede)
+![Screenshot from 2024-03-19 18-54-13](https://github.com/Omega12Pirme/BotanixClub/assets/105157723/1a66e346-de7e-49c3-927a-58474ae8cede)
 
 
 - Contribute to the club: Any member of a club can contribute to the common fund (pool), depositing CFX coins that can be used in proposals.
 
-https://blockscout.botanixlabs.dev/tx/0xdf65a92102bfc0387acb3802a080f76180067239d10c69d83b83468cb062b623
+  https://blockscout.botanixlabs.dev/tx/0xdf65a92102bfc0387acb3802a080f76180067239d10c69d83b83468cb062b623
 
 ![Screenshot from 2024-03-19 18-58-25](https://github.com/Omega12Pirme/BotanixClub/assets/105157723/af7f392c-33c6-430d-ac4b-3a7e9e9e486a)
 
 
-- Create and Vote on Proposals: Any member who has contributed funds to the club pool can create proposals, giving a description, amount (not to exceed the pool amount), and recipient, with a view to investing in any business/person in a project. Also, all members can approve or reject the proposal (only one vote per member is allowed on each proposal).
+- Create and Vote on Proposals: Any member who has contributed funds to the club pool can create proposals, giving a description, amount (not to exceed the pool amount), and recipient, with a view     to investing in any business/person in a project. Also, all members can approve or reject the proposal (only one vote per member is allowed on each proposal).
 
 
-  ![Screenshot from 2024-03-19 18-59-06](https://github.com/Omega12Pirme/BotanixClub/assets/105157723/26ebb062-0e1d-4e49-ac23-d1472cb5a483)
+![Screenshot from 2024-03-19 18-59-06](https://github.com/Omega12Pirme/BotanixClub/assets/105157723/26ebb062-0e1d-4e49-ac23-d1472cb5a483)
 
 
-- Run Proposals: A proposal owner can execute a proposal (if approval is greater than rejection), which will cause the proposal amount to be sent to the specified recipient. The owner can also close a proposal, in case of not continuing with it, either as a cancellation, publication error or to avoid sending funds.
+- Run Proposals: A proposal owner can execute a proposal (if approval is greater than rejection), which will cause the proposal amount to be sent to the specified recipient. The owner can also close   a proposal, in case of not continuing with it, either as a cancellation, publication error or to avoid sending funds.
 
   https://blockscout.botanixlabs.dev/tx/0x222474b5403613f8bbd59a12ad86e158254e5f2a59bf674ad0c1c66b8219dd6b
 
