@@ -119,12 +119,14 @@ The club smart contract has some restrictions, similar to real hedge funds:
     <tr>
       <td>Vercel</td>
       <td>
-       
+       fgh
       </td>
     </tr>
     </tr>
     </table>
+    
 </div>
+
 <br><br>
 
 ## 🚀 Setting up the project locally
