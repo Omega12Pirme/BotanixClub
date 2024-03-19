@@ -120,7 +120,7 @@ The club smart contract has some restrictions, similar to real hedge funds:
     <tr>
       <td>Vercel</td>
       <td>
-       fgh
+       https://botanix-club.vercel.app/
       </td>
     </tr>
     </tr>
