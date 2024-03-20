@@ -18,6 +18,8 @@ import Login from "./pages/login";
 export const App = () =>{
     // Render the protected routes if authenticated
     return (
+
+
       <div>
         <Routes>
           <Route element={<Layout />}>
@@ -32,6 +34,7 @@ export const App = () =>{
           </Route>
         </Routes>
       </div>
+
     );
   
 }
