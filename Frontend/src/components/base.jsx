@@ -87,11 +87,6 @@ function Base() {
   var isAuthenticated = localStorage.getItem('filWalletAddress');
 
 
-  if (isAuthenticated == null) {
-
-    // Redirect to login page if not authenticated
-    return <Login/>;
-  } else{
 
   return (
     <div id="page-top">
@@ -378,7 +373,7 @@ function Base() {
 </div>
 
   )
-  }
+  
 };
 
 export default Base;

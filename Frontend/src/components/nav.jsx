@@ -79,6 +79,7 @@ function Nav() {
   setAddress(Address);
 
     setLoading(false);
+    window.location.reload();
   };
 
 
@@ -86,6 +87,7 @@ function Nav() {
   function logout(){
     alert("Logout")
     localStorage.clear();
+    window.location.reload();
     // Logout();
   }
 
