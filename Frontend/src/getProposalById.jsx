@@ -39,6 +39,7 @@ var clubId = localStorage.getItem("clubId");
     var aeWalletAddress = localStorage.getItem("filWalletAddress");
     
     var clubs = await contractPublic.methods.getProposalById(clubId, proposalId).call();
+    console.log(clubs)
     if(clubs != undefined) {
 
       // console.log(clubs.Cid,clubs.PieceCid,clubs.carsize,clubs.posdiverification,clubs.storageProvider,clubs.DealId)
@@ -56,6 +57,7 @@ var clubId = localStorage.getItem("clubId");
       $('#CID').text(clubs.Cid);
       
       if(clubs.status == 'Pending' && clubs.creator == aeWalletAddress) {
+        alert("Heyy")
         $('.creator_options').css('display','block');
       }
       if(clubs.status != 'Pending') {

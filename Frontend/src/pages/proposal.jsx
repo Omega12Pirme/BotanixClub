@@ -19,6 +19,9 @@ import GetClub from '../getclub';
 import Tg from "../components/toggle";
 
 const ethers = require("ethers")
+
+
+const provider = new ethers.providers.Web3Provider(window.ethereum);
 const DataDaoAddress  = "0x8138489b863a68f224307a5D0Fa630917d848e25"
 const web3 = new Web3(new Web3.providers.HttpProvider("https://node.botanixlabs.dev"));
 
@@ -83,29 +86,37 @@ async function runProposal(event) {
             const encodedABI = query.encodeABI();
             
             
-            const signedTx = await web3.eth.accounts.signTransaction(
-              {
-                from: my_wallet[0].address,
-                gasLimit: "10000000",
-                  maxPriorityFeePerGas:web3.utils.toWei('0.001', 'gwei'),
-                  maxFeePerGas: "10000000",
-        to: contractPublic.options.address,
-        data: encodedABI,
-              },
-              my_wallet[0].privateKey,
-              false
-            );
-            var txReceipt = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
+            try{
+              const abi = ABI.abi;
+                const iface = new ethers.utils.Interface(abi);
+                const encodedData = iface.encodeFunctionData("executeProposal", [clubId,proposalId]);
+                const GAS_MANAGER_POLICY_ID = "479c3127-fb07-4cc6-abce-d73a447d2c01";
+            
+                const signer = provider.getSigner();
 
-
-          notification.success({
-            message: 'Transaction Successful',
-            description: (
-              <div>
-                Transaction Hash: <a href={`https://blockscout.botanixlabs.dev/tx/${txReceipt.transactionHash}`} target="_blank" rel="noopener noreferrer">{txReceipt.transactionHash}</a>
-              </div>
-            )
-          });
+                console.log("singer",signer);
+                const tx = {
+                  to: marketplaceAddress,
+                  data: encodedData,
+                };
+                const txResponse = await signer.sendTransaction(tx);
+                const txReceipt = await txResponse.wait();
+  
+                notification.success({
+                  message: 'Transaction Successful',
+                  description: (
+                    <div>
+                      Transaction Hash: <a href={`https://blockscout.botanixlabs.dev/tx/${txReceipt.transactionHash}`} target="_blank" rel="noopener noreferrer">{txReceipt.transactionHash}</a>
+                    </div>
+                  )
+                });
+  
+                console.log(txReceipt.transactionHash);
+            
+                
+              }catch(error){
+                console.log(error)
+              }
 
            
           } else {
@@ -118,29 +129,37 @@ async function runProposal(event) {
               toast.error("Voting is still ON")
             }
               
-              const signedTx = await web3.eth.accounts.signTransaction(
-                {
-                  from: my_wallet[0].address,
-                  gasLimit: "10000000",
-                  maxPriorityFeePerGas:web3.utils.toWei('0.001', 'gwei'),
-                  maxFeePerGas: "10000000",
-        to: contractPublic.options.address,
-        data: encodedABI,
-                },
-                my_wallet[0].privateKey,
-                false
-              );
-              var txReceipt = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
+            try{
+               
+                
+              const abi = ABI.abi;
+                const iface = new ethers.utils.Interface(abi);
+                const encodedData = iface.encodeFunctionData("closeProposal", [clubId,proposalId]);
+                const GAS_MANAGER_POLICY_ID = "479c3127-fb07-4cc6-abce-d73a447d2c01";
+            
+                const signer = provider.getSigner();
 
+            console.log("singer",signer);
+            const tx = {
+              to: marketplaceAddress,
+              data: encodedData,
+            };
+            const txResponse = await signer.sendTransaction(tx);
+            const txReceipt = await txResponse.wait();
 
-          notification.success({
-            message: 'Transaction Successful',
-            description: (
-              <div>
-                Transaction Hash: <a href={`https://blockscout.botanixlabs.dev/tx/${txReceipt.transactionHash}`} target="_blank" rel="noopener noreferrer">{txReceipt.transactionHash}</a>
-              </div>
-            )
-          });
+            notification.success({
+              message: 'Transaction Successful',
+              description: (
+                <div>
+                  Transaction Hash: <a href={`https://blockscout.botanixlabs.dev/tx/${txReceipt.transactionHash}`} target="_blank" rel="noopener noreferrer">{txReceipt.transactionHash}</a>
+                </div>
+              )
+            });
+
+            console.log(txReceipt.transactionHash);
+              }catch(error){
+                console.log(error)
+              }
             }
           }
           
@@ -248,32 +267,30 @@ async function voteOnProposal() {
 
         
 
-        const nonce = await web3.eth.getTransactionCount(my_wallet[0].address);
-        
-        const signedTx = await web3.eth.accounts.signTransaction(
-          {
-            from: my_wallet[0].address,
-            gasLimit: "10000000",
-            maxPriorityFeePerGas:web3.utils.toWei('0.001', 'gwei'),
-            maxFeePerGas: "10000000",
-        to: contractPublic.options.address,
-        data: encodedABI,
-            //value: amountAE
-          },
-          my_wallet[0].privateKey,
-          false
-        );
-        var txReceipt = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
+        const abi = ABI.abi;
+              const iface = new ethers.utils.Interface(abi);
+              const encodedData = iface.encodeFunctionData("voteOnProposal", [clubId,proposalId, optionBool]);
+              const GAS_MANAGER_POLICY_ID = "479c3127-fb07-4cc6-abce-d73a447d2c01";
+          
+              const signer = provider.getSigner();
 
+              console.log("singer",signer);
+              const tx = {
+                to: marketplaceAddress,
+                data: encodedData,
+              };
+              const txResponse = await signer.sendTransaction(tx);
+              const txReceipt = await txResponse.wait();
 
-          notification.success({
-            message: 'Transaction Successful',
-            description: (
-              <div>
-                Transaction Hash: <a href={`https://blockscout.botanixlabs.dev/tx/${txReceipt.transactionHash}`} target="_blank" rel="noopener noreferrer">{txReceipt.transactionHash}</a>
-              </div>
-            )
-          });
+              notification.success({
+                message: 'Transaction Successful',
+                description: (
+                  <div>
+                    Transaction Hash: <a href={`https://blockscout.botanixlabs.dev/tx/${txReceipt.transactionHash}`} target="_blank" rel="noopener noreferrer">{txReceipt.transactionHash}</a>
+                  </div>
+                )
+              });
+              console.log(txReceipt.transactionHash);
        
       } catch (error) {
         console.log(error.message);
@@ -583,13 +600,7 @@ function Proposal() {
                       <option value={0}>No</option>
                     </select>{" "}
                     <br />
-                    Enter your password: <br />
-                    <input
-                      type="password"
-                      id="passwordShowPVVote"
-                      className="form-control"
-                    />{" "}
-                    <br />
+                    
                     <div 
                      onClick={() => {
                         voteOnProposal();
@@ -624,13 +635,7 @@ function Proposal() {
                       <option value="close">Close proposal</option>
                     </select>{" "}
                     <br />
-                    Enter your password: <br />
-                    <input
-                      type="password"
-                      id="passwordShowPVExecution"
-                      className="form-control"
-                    />{" "}
-                    <br />
+                   
                     <div href="" id="btnExecution" onClick={() => {
                         runProposal();
                       }} className="btn btn-success">

@@ -11,10 +11,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import GetClub from "../getclub";
 
 import GetProposals from "../getProposals";
-
 import axios from 'axios';
 import Tg from "../components/toggle";
-
+const ethers = require("ethers")
 const web3 = new Web3(new Web3.providers.HttpProvider("https://node.botanixlabs.dev"));
 var contractPublic = null;
 
@@ -27,6 +26,9 @@ async function getContract(userAddress) {
     }
   }
 
+
+
+const provider = new ethers.providers.Web3Provider(window.ethereum);
 
 async function contributeClub() {
  
@@ -82,43 +84,40 @@ async function contributeClub() {
           const query = contractPublic.methods.contributeToClub(clubId);
           const encodedABI = query.encodeABI();
           const accounts1 = web3.eth.accounts;
-          //  alert("Yes");
-          // console.log(accounts1)
-
           
 
 
             if (web3 && web3.eth) {
               try {
-                const signedTx = await web3.eth.accounts.signTransaction(
-                  {
+                const abi = ABI.abi;
+                    const iface = new ethers.utils.Interface(abi);
+                    const encodedData = iface.encodeFunctionData("contributeToClub", [clubId]);
+                    const GAS_MANAGER_POLICY_ID = "479c3127-fb07-4cc6-abce-d73a447d2c01";
+                
                     
-                    from: my_wallet[0].address,
-                    gasLimit: "10000000",
-            
-                    maxPriorityFeePerGas:web3.utils.toWei('0.001', 'gwei'),
-                    maxFeePerGas: "10000000",
-                    to: contractPublic.options.address,
-                    data: encodedABI,
-                    value:amountAE,
-                   
-                   
-                  },
-                  my_wallet[0]["privateKey"],
-                  false,
-                );
+                    const signer = provider.getSigner();
 
-                var txReceipt = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
+              console.log("singer",signer);
+              const tx = {
+                to: marketplaceAddress,
+                data: encodedData,
+                value: amountAE,
 
+              };
+              const txResponse = await signer.sendTransaction(tx);
+              const txReceipt = await txResponse.wait();
 
-          notification.success({
-            message: 'Transaction Successful',
-            description: (
-              <div>
-                Transaction Hash: <a href={`https://blockscout.botanixlabs.dev/tx/${txReceipt.transactionHash}`} target="_blank" rel="noopener noreferrer">{txReceipt.transactionHash}</a>
-              </div>
-            )
-          });
+              notification.success({
+                message: 'Transaction Successful',
+                description: (
+                  <div>
+                    Transaction Hash: <a href={`https://blockscout.botanixlabs.dev/tx/${txReceipt.transactionHash}`} target="_blank" rel="noopener noreferrer">{txReceipt.transactionHash}</a>
+                  </div>
+                )
+              });
+
+              console.log(txReceipt.transactionHash);
+                
               } catch (error) {
 
           toast.error(error);
@@ -180,31 +179,37 @@ async function leaveClub() {
         
         const query = contractPublic.methods.leaveClub(clubId);
         const encodedABI = query.encodeABI();
-        const signedTx = await web3.eth.accounts.signTransaction(
-          {
-            from: my_wallet[0].address,
-            gasLimit: "10000000",
-            
-            maxPriorityFeePerGas:web3.utils.toWei('0.001', 'gwei'),
-            maxFeePerGas: "10000000",
-    to: contractPublic.options.address,
-    data: encodedABI,
-            //value: amountAE 
-          },
-          my_wallet[0].privateKey,
-          false
-        );
-        var txReceipt = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
 
+        try{
+          const abi = ABI.abi;
+            const iface = new ethers.utils.Interface(abi);
+            const encodedData = iface.encodeFunctionData("leaveClub", [clubId]);
+            const GAS_MANAGER_POLICY_ID = "479c3127-fb07-4cc6-abce-d73a447d2c01";
+        
+            const signer = provider.getSigner();
 
-          notification.success({
-            message: 'Transaction Successful',
-            description: (
-              <div>
-                Transaction Hash: <a href={`https://blockscout.botanixlabs.dev/tx/${txReceipt.transactionHash}`} target="_blank" rel="noopener noreferrer">{txReceipt.transactionHash}</a>
-              </div>
-            )
-          });
+              console.log("singer",signer);
+              const tx = {
+                to: marketplaceAddress,
+                data: encodedData,
+              };
+              const txResponse = await signer.sendTransaction(tx);
+              const txReceipt = await txResponse.wait();
+
+              notification.success({
+                message: 'Transaction Successful',
+                description: (
+                  <div>
+                    Transaction Hash: <a href={`https://blockscout.botanixlabs.dev/tx/${txReceipt.transactionHash}`} target="_blank" rel="noopener noreferrer">{txReceipt.transactionHash}</a>
+                  </div>
+                )
+              });
+
+              console.log(txReceipt.transactionHash);
+          }catch(error){
+            console.log(error)
+          }
+
         }
       }
     $('.errorJoinLeaveClub').css('display','none');
@@ -274,36 +279,34 @@ function Club() {
   
   
   
-          const nonce = await web3.eth.getTransactionCount(my_wallet[0].address);
+          
             if (web3 && web3.eth) {
               try {
-                const signedTx = await web3.eth.accounts.signTransaction(
-                  {
-                    from: my_wallet[0].address,
-                    gasLimit: "10000000",
-            
-            maxPriorityFeePerGas:web3.utils.toWei('0.001', 'gwei'),
-            maxFeePerGas: "10000000",
-            to: contractPublic.options.address,
-            data: encodedABI,
-                    //value: amountAE 
-                  },
-                  my_wallet[0].privateKey,
-                  false
-                );
-        
-            
-                var txReceipt = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
+                const abi = ABI.abi;
+              const iface = new ethers.utils.Interface(abi);
+              const encodedData = iface.encodeFunctionData("joinClub", [clubId]);
+              const GAS_MANAGER_POLICY_ID = "479c3127-fb07-4cc6-abce-d73a447d2c01";
+          
+              const signer = provider.getSigner();
 
+              console.log("singer",signer);
+              const tx = {
+                to: marketplaceAddress,
+                data: encodedData,
+              };
+              const txResponse = await signer.sendTransaction(tx);
+              const txReceipt = await txResponse.wait();
 
-          notification.success({
-            message: 'Transaction Successful',
-            description: (
-              <div>
-                Transaction Hash: <a href={`https://blockscout.botanixlabs.dev/tx/${txReceipt.transactionHash}`} target="_blank" rel="noopener noreferrer">{txReceipt.transactionHash}</a>
-              </div>
-            )
-          });
+              notification.success({
+                message: 'Transaction Successful',
+                description: (
+                  <div>
+                    Transaction Hash: <a href={`https://blockscout.botanixlabs.dev/tx/${txReceipt.transactionHash}`} target="_blank" rel="noopener noreferrer">{txReceipt.transactionHash}</a>
+                  </div>
+                )
+              });
+
+              console.log(txReceipt.transactionHash);
               } catch (error) {
                 console.error('Error sending signed transaction:', error);
               }
@@ -311,22 +314,6 @@ function Club() {
               console.error('web3 instance is not properly initialized.');
             }
   
-            
-  
-  
-  
-          // const signedTx = await this.web3.eth.accounts.signTransaction(
-          //   {
-          //     from: my_wallet[0].address,
-          //     gasPrice: "20000000000",
-          //     gas: "2000000",
-          //     to: this.contractPublic.options.address,
-          //     data: encodedABI,
-          //   },
-          //   my_wallet[0].privateKey,
-          //   false
-          // );
-          // var clubId = await this.web3.eth.sendSignedTransaction(signedTx.rawTransaction);
           }
       }
       $('.errorJoinLeaveClub').css('display','none');
@@ -584,15 +571,7 @@ function Club() {
                   </div>
                   <div className="card-body">
                     <p>
-                      Enter your password: <br />
-                      <input
-                        type="password"
-                        id="passwordShowPVJoin"
-                        className="form-control"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                      />{" "}
-                      <br />
+                      
                       <div id="btnJoinClub" onClick={() => {
                         joinClub();
                       }} className="btn btn-success">
@@ -629,13 +608,7 @@ function Club() {
                         className="form-control"
                       />{" "}
                       <br />
-                      Enter your password: <br />
-                      <input
-                        type="password"
-                        id="passwordShowPVContribute"
-                        className="form-control"
-                      />{" "}
-                      <br />
+                      
                       <a
                         href="#"
                         id="btnContributeClub"
@@ -670,13 +643,7 @@ function Club() {
                   </div>
                   <div className="card-body">
                     <p>
-                      Enter your password: <br />
-                      <input
-                        type="password"
-                        id="passwordShowPVLeave"
-                        className="form-control"
-                      />{" "}
-                      <br />
+                     
                       <div  id="btnLeaveClub"  onClick={() => {
                         leaveClub();
                       }} className="btn btn-success">

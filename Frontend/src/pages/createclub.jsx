@@ -17,11 +17,15 @@ const web3 = new Web3(new Web3.providers.HttpProvider("https://node.botanixlabs.
 
 
 
-const provider = new ethers.providers.JsonRpcProvider("https://node.botanixlabs.dev");
+const provider = new ethers.providers.Web3Provider(window.ethereum);
+
 
 
 const apiKey = "207e0c12.0ca654f5c03a4be18a3185ea63c31f81"
 var contractPublic = null;
+
+
+const owneraddress = localStorage.getItem("filWalletAddress");
 
 
 function CreateClub() {
@@ -143,35 +147,39 @@ function CreateClub() {
 
 
           // console.log(encodedABI);
-        
-          const signedTx = await web3.eth.accounts.signTransaction(
-          {
-            
-            from: my_wallet[0].address,
-            gasLimit: "10000000",
-            
-            maxPriorityFeePerGas:web3.utils.toWei('0.001', 'gwei'),
-            maxFeePerGas: "10000000",
-                    to: contractPublic.options.address,
-                    data: encodedABI,
-                  
-          },
-          my_wallet[0]["privateKey"],
-          false,
-        );
-        alert(my_wallet[0].address)
-          var txReceipt = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
+
+          console.log("The addrtess  is",owneraddress);
+
+        const abi = ABI.abi;
+            const iface = new ethers.utils.Interface(abi);
+            const encodedData = iface.encodeFunctionData("createClub", [clubName,cid1]);
+            const GAS_MANAGER_POLICY_ID = "479c3127-fb07-4cc6-abce-d73a447d2c01";
 
 
-          notification.success({
-            message: 'Transaction Successful',
-            description: (
-              <div>
-                Transaction Hash: <a href={`https://blockscout.botanixlabs.dev/tx/${txReceipt.transactionHash}`} target="_blank" rel="noopener noreferrer">{txReceipt.transactionHash}</a>
-              </div>
-            )
-          });
-          console.log(txReceipt.transactionHash);
+            await provider.send('eth_requestAccounts', []); // <- this promps user to connect metamask
+            const signer = provider.getSigner();
+             
+
+              console.log("singer",signer);
+              const tx = {
+                to: marketplaceAddress,
+                data: encodedData,
+                gasLimit: 10000000,
+      gasPrice: ethers.utils.parseUnits('0.001', 'gwei')
+              };
+              const txResponse = await signer.sendTransaction(tx);
+              const txReceipt = await txResponse.wait();
+
+              notification.success({
+                message: 'Transaction Successful',
+                description: (
+                  <div>
+                   Transaction Hash: <a href={`https://blockscout.botanixlabs.dev/tx/${txReceipt.transactionHash}`} target="_blank" rel="noopener noreferrer">{txReceipt.transactionHash}</a>
+                  </div>
+                )
+              });
+              console.log(txReceipt.transactionHash);
+
 
    
         $('#club_name').val('');
@@ -357,14 +365,15 @@ function CreateClub() {
                         onChange={(e) => setClubName(e.target.value)}
                       />{" "}
                       <br />
-                      Your password:{" "}
+                      Club Description:{" "}
                       <input
-                        type="password"
-                        id="trx_password"
+                        type="text"
+                        id="club_name"
                         className="form-control form-control-user"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Give a Description for this Investment Club"
+                        
                       />{" "}
+                      <br />
                       <br />
                       <br />
                       <br />

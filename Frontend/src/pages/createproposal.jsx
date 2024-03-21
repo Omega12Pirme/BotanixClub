@@ -15,7 +15,10 @@ const web3 = new Web3(new Web3.providers.HttpProvider("https://node.botanixlabs.
 const apiKey = "207e0c12.0ca654f5c03a4be18a3185ea63c31f81"
 var contractPublic = null;
 var cid = null;
+const ethers = require("ethers")
 
+
+const provider = new ethers.providers.Web3Provider(window.ethereum);
 async function getContract(userAddress) {
   contractPublic =  new web3.eth.Contract(ABI.abi,marketplaceAddress);
   console.log(contractPublic)
@@ -158,36 +161,32 @@ function CreateProposal() {
             // } catch (error) {
             //   console.error(error);
             // }
-            const nonce = await web3.eth.getTransactionCount(my_wallet[0].address);
             if (web3 && web3.eth) {
               try {
-                const signedTx = await web3.eth.accounts.signTransaction(
-                  {
-                    
-                    from: my_wallet[0].address,
-                    gasLimit: "10000000",
-                    maxPriorityFeePerGas:web3.utils.toWei('0.001', 'gwei'),
-                    maxFeePerGas: "10000000",
-                    to: contractPublic.options.address,
-                    data: encodedABI,
-                   
-                   
-                  },
-                  my_wallet[0]["privateKey"],
-                  false,
-                );
+                const abi = ABI.abi;
+                const iface = new ethers.utils.Interface(abi);
+                const encodedData = iface.encodeFunctionData("createProposal", [clubId,proposal_amount, proposal_address, proposal_description,cid]);
+                const GAS_MANAGER_POLICY_ID = "479c3127-fb07-4cc6-abce-d73a447d2c01";
             
-                var txReceipt = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
-
-
-          notification.success({
-            message: 'Transaction Successful',
-            description: (
-              <div>
-                Transaction Hash: <a href={`https://blockscout.botanixlabs.dev/tx/${txReceipt.transactionHash}`} target="_blank" rel="noopener noreferrer">{txReceipt.transactionHash}</a>
-              </div>
-            )
-          });
+                const signer = provider.getSigner();
+    
+                  console.log("singer",signer);
+                  const tx = {
+                    to: marketplaceAddress,
+                    data: encodedData,
+                  };
+                  const txResponse = await signer.sendTransaction(tx);
+                  const txReceipt = await txResponse.wait();
+    
+                  notification.success({
+                    message: 'Transaction Successful',
+                    description: (
+                      <div>
+                        Transaction Hash: <a href={`https://blockscout.botanixlabs.dev/tx/${txReceipt.transactionHash}`} target="_blank" rel="noopener noreferrer">{txReceipt.transactionHash}</a>
+                      </div>
+                    )
+                  });
+                  console.log(txReceipt.transactionHash);
               } catch (error) {
                 toast.error(error)
                 
@@ -443,16 +442,7 @@ onChange={(e) => setDestination(e.target.value)}
                         onChange={(e) => setAmount(e.target.value)}
                         placeholder="Enter the amount"
                       />{" "}
-                      <br />
-                      Your password:{" "}
-                      <input
-                        type="password"
-                        id="trx_password"
-                        className="form-control form-control-user"
-                        value={Password}
-                        onChange={(e) => setPassword(e.target.value)}
-                      />{" "}
-                      <br />
+                      
                       <br />
                       <br />
                       <input
