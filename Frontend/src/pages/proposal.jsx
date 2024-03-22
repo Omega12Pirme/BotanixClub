@@ -79,6 +79,9 @@ async function runProposal(event) {
 
           if(ans){
             toast.error("Voting is still ON")
+            $('.successExecution').css("display","none");
+            $('.errorExecution').css("display","block");
+            $('.errorExecution').text("Voting is still ON");
           }
           
           if(option_execution == 'execute') {
@@ -125,9 +128,14 @@ async function runProposal(event) {
               const encodedABI = query.encodeABI();
               const ans  = await contractPublic.methods.isVotingOn(clubId,proposalId).call();
 
-            if(ans){
-              toast.error("Voting is still ON")
-            }
+              if(ans){
+                toast.error("Voting is still ON")
+                $('.successExecution').css("display","none");
+            $('.errorExecution').css("display","block");
+            $('.errorExecution').text("Voting is still ON");
+            return;
+
+              }
               
             try{
                
@@ -165,7 +173,7 @@ async function runProposal(event) {
           
         } catch (error) {
           // alert(error)
-          toast.error(error)
+         
           console.log(error)
           $('.successExecution').css("display","none");
           $('.errorExecution').css("display","block");
@@ -249,7 +257,9 @@ async function voteOnProposal() {
     if(my_wallet !== undefined)
     {
       $('.successVote').css("display","block");
+      
       $('.successVote').text("Voting...");
+      
       var optionBool = option_vote == '1' ? true : false;
       try {
         const ans  = await contractPublic.methods.isVotingOn(clubId,proposalId).call();
@@ -257,7 +267,11 @@ async function voteOnProposal() {
         console.log("ans",ans)
        
         if(!ans){
+          $('.successVote').css("display","none");
+          $('.errorVote').css("display","block");
+          $('.errorVote').text("Voting time periods is over!");
           toast.error("Voting time periods is over!");
+         
           return;
         }
         

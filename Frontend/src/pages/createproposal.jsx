@@ -69,16 +69,7 @@ function CreateProposal() {
 
   
   async function createProposal() {
-    toast.info('Prposal Creation intiated ...', {
-      position: "top-right",
-      autoClose: 15000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-      });
+    
     var walletAddress = localStorage.getItem("filWalletAddress");
     // alert(walletAddress) /// /////
     await getContract(walletAddress);
@@ -97,7 +88,7 @@ function CreateProposal() {
         $('#errorCreateProposal').text("Destination address is required");
         return;
       }
-      if(proposal_amount == '') {
+      if(proposal_amount == '' || proposal_amount <=0) {
         $('#errorCreateProposal').css("display","block");
         $('#errorCreateProposal').text("Amount is required");
         return;
@@ -109,6 +100,16 @@ function CreateProposal() {
       }
       var clubId = localStorage.getItem("clubId");
       const my_wallet = await web3.eth.accounts.wallet.load(password);
+      toast.info('Prposal Creation intiated ...', {
+        position: "top-right",
+        autoClose: 15000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
       if(my_wallet !== undefined)
       {
         $('.loading_message_creating').css("display","block");
@@ -190,8 +191,10 @@ function CreateProposal() {
                   console.log(txReceipt.transactionHash);
               } catch (error) {
                 toast.error(error)
-                
-                console.error('Error sending signed transaction:', error);
+                $('#errorCreateProposal').css("display","block");
+                $('#errorCreateProposal').text(error);
+                return;
+            
               }
             } else {
               console.error('web3 instance is not properly initialized.');
