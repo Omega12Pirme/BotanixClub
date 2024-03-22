@@ -330,6 +330,7 @@ function Club() {
 
     useEffect(() => {
         {
+          
           const ans  = localStorage.getItem("clubverification")
           const pod = localStorage.getItem("podsi");
           if(ans == "a"){

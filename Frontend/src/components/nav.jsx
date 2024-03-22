@@ -55,7 +55,6 @@ function Nav() {
 
 
   const handleLogin = async () => {
-    alert("Heyyy")
     setLoading(true);
     
     if(typeof window.ethereum =="undefined"){

@@ -22,11 +22,37 @@ function JoinClub() {
 
     useEffect(() => {
         {
+          if(localStorage.getItem('filWalletAddress') != null) {
+            checkBalance();
+    
+            const myWallet = localStorage.getItem("filWalletAddress")
+            $('.current_account_text').text(myWallet);
+          }
             GetClubs(); 
         }
       }, []);
 
-
+      async function checkBalance() {
+  
+        try {
+          const myWallet = localStorage.getItem("filWalletAddress");
+          if (!myWallet) {
+            // Handle the case where the wallet address is not available in localStorage
+            return;
+          }
+          
+          // Assuming you've properly initialized the web3 instance before this point
+          const balanceWei = await web3.eth.getBalance(myWallet);
+          
+          // Convert Wei to Ether (assuming Ethereum)
+          const balanceEther = web3.utils.fromWei(balanceWei, "ether");
+          
+          // Update the balance on the page
+          $('.view_balance_address').text(balanceEther);
+        } catch (error) {
+          console.error("Error:", error);
+        }
+      }
   return (
     <div id="page-top"> 
     {/* Page Wrapper */}

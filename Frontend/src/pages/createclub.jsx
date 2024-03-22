@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 
 import lighthouse from '@lighthouse-web3/sdk'
@@ -37,6 +37,27 @@ function CreateClub() {
   const [password, setPassword] = useState('');
 
 
+  async function checkBalance() {
+  
+    try {
+      const myWallet = localStorage.getItem("filWalletAddress");
+      if (!myWallet) {
+        // Handle the case where the wallet address is not available in localStorage
+        return;
+      }
+      
+      // Assuming you've properly initialized the web3 instance before this point
+      const balanceWei = await web3.eth.getBalance(myWallet);
+      
+      // Convert Wei to Ether (assuming Ethereum)
+      const balanceEther = web3.utils.fromWei(balanceWei, "ether");
+      
+      // Update the balance on the page
+      $('.view_balance_address').text(balanceEther);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
 
   const register_job = async(cid1) =>{
     const formData = new FormData();
@@ -213,6 +234,18 @@ function CreateClub() {
   
   }
 
+  useEffect(() => {
+    {
+      
+      
+      if(localStorage.getItem('filWalletAddress') != null) {
+        checkBalance();
+
+        const myWallet = localStorage.getItem("filWalletAddress")
+        $('.current_account_text').text(myWallet);
+      }
+    }
+  }, []);
   
 
   return (

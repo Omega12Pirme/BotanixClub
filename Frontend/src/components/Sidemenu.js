@@ -55,8 +55,11 @@ function SideMenu({ isOpen, setIsOpen, smartAccount, logout, address }) {
 
 
       setValue1(balanceEther)
+
+    
       
       smarbal = balanceEther;
+ 
       // Update the balance on the page
     } catch (error) {
       console.error("Error:", error);
@@ -90,7 +93,7 @@ function SideMenu({ isOpen, setIsOpen, smartAccount, logout, address }) {
                   <div className=" mashiha divide-gray-900 bg-gray-900 text-white-900" >
                     <div className="px-4 mm  sm:px-6">
                       <div className="flex items-start justify-between">
-                        <h2 className="text-llg font-medium text-white">Owner Address</h2>
+                        <h2 className="text-llg font-medium text-white">Botanix Club</h2>
                         
                       </div>
                       
@@ -114,7 +117,7 @@ close
                       </button>
                       </div>
                       <div className="text-white text-2xl m-4">
-                      ${parseFloat(value).toFixed(2)}
+                      ${parseFloat(value1).toFixed(2)}
                       
                       </div>
                       <button onClick={() => testclk()} className="bg-blue-500 mb-3 text-white py-2 px-4 rounded-full w-full">
@@ -128,7 +131,7 @@ close
   <div className=' d1 flex items-center bg-zinc-100 text-zinc-300 w-fit p-2 px-3 rounded-l-lg'>
     <p className='d text-sm'>{'BTC'}</p>
     <p className= 'dd bg-zinc-800 p-1 px-3 ml-3 rounded-lg text-zinc-100'>
-      {parseFloat(smarbal).toFixed(14)}
+      {(value1)}
     </p>
   </div>
 </div>
