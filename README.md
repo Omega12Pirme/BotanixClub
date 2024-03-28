@@ -174,6 +174,7 @@ Open your web browser and visit the URL SHOWING IN UR TERMINAL to interact with 
 | Tailwind CSS      | Utility-first CSS framework for building custom designs   | [Tailwind CSS](https://tailwindcss.com/)              |
 | Solidity | Programming language used for smart contract development on the Ethereum blockchain | https://docs.soliditylang.org/ |
 |LightHouse | Store file Secure, Reliable, & Lightning-Fast with Lighthouse. |https://www.lighthouse.storage/|
+|Botanix CLub| Botanix Labs is building a fully decentralized EVM ecosystem on Bitcoin powered by the Spiderchain that unlocks the largest capital pool in crypto.|https://botanixlabs.xyz/en/home|
 
 
 
@@ -182,6 +183,7 @@ Open your web browser and visit the URL SHOWING IN UR TERMINAL to interact with 
 
 ## 🎥 Video Demo
 
+https://youtu.be/RqvKcSqcLBo?si=78AmrnWvzNibGghY
 
 
 ## 🤝 Contributing
